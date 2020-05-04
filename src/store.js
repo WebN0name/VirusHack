@@ -65,7 +65,38 @@ export default new Vuex.Store({
                 }
             ]
         },
-        nextId: 1
+        nextId: 1,
+
+        clients: [
+            {
+                avatar: {
+                    src: 'https://sun9-52.userapi.com/c855216/v855216062/1f69b6/POMI5Q3OLII.jpg'
+                },
+                firstName: 'Владимир',
+                lastName: 'Строев'
+            },
+            {
+                avatar: {
+                    src: 'https://sun9-52.userapi.com/c855216/v855216062/1f69b6/POMI5Q3OLII.jpg'
+                },
+                firstName: 'Иван',
+                lastName: 'Иванович'
+            },
+            {
+                avatar: {
+                    src: 'https://sun9-52.userapi.com/c855216/v855216062/1f69b6/POMI5Q3OLII.jpg'
+                },
+                firstName: 'Семен',
+                lastName: 'Семенович'
+            },
+        ],
+
+        client: {
+            avatar: Object,
+            firstName: '',
+            lastName: '',
+            diagnoz: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, exercitationem enim cupiditate, hic, deleniti corrupti eos error architecto ad quia ullam at distinctio consequuntur. Architecto itaque quis voluptatem? Excepturi, quidem.'
+        }
     },
     mutations: {
         addItem(state, item) {

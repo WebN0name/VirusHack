@@ -27,6 +27,16 @@ const router = new Router({
             path: '/service-reminders',
             name: 'serviceReminders',
             component: () => import('./pages/ServiceReminders.vue')
+        },
+        {
+            path: '/Client',
+            name: 'Client',
+            component: () => import('./pages/Client.vue')
+        },
+        {
+            path: '/Psyhologist',
+            name: 'Psyhologist',
+            component: () => import('./pages/Psyhologist.vue')
         }
     ]
 });

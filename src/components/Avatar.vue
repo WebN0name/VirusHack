@@ -3,7 +3,7 @@
         <template v-if="type === 'simple'">
             <div class="c-avatar__picture relative">
                 <span v-if="notify" class="absolute top-0 right-0 h-4 w-4 rounded-full bg-white text-xs text-black-3 shadow">{{ notify.text }}</span>
-                <img v-if="img" :src="img.src" :alt="img.alt" class="rounded-full" :class="imgClass" />
+                <img v-if="img" :src="img.src" :alt="img.alt" class="rounded-full" :class="imgClass"  style="width: 48px; height: 48px"/>
                 <span v-else class="block bg-primary-light rounded-full" :class="avatarClass"></span>
             </div>
         </template>

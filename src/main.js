@@ -3,6 +3,9 @@ import App from './App.vue';
 import { Icon } from 'leaflet';
 import '@/assets/css/tailwind.css';
 import 'leaflet/dist/leaflet.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import '@fortawesome/fontawesome-free/js/all.min.js'
+
 
 import router from './router';
 import store from './store';

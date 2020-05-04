@@ -63,9 +63,9 @@
             </section>
         </Card> -->
         <div class="w-full flex flex-col mt-6 lg:flex-row">
-            <Card class="w-full mr-0 mb-6 lg:w-1/2 lg:mr-6 lg:mb-0">
+            <Card class="w-full mr-0 mb-6 lg:w-1/2 lg:mr-6 lg:mb-0 custom-card-class">
                 <header class="w-full flex justify-between items-center m-5 md:m-10">
-                    <h2 class="uppercase text-black-3">Fleet activity map</h2>
+                    <h2 class="uppercase text-black-3">История</h2>
                 </header>
                 <ul v-if="carList" class="mb-5 mx-5 md:mb-10 md:mx-10">
                     <li class="flex justify-between mt-4" v-for="car in carList" :key="car.id">
@@ -105,9 +105,9 @@
                     </div>
                 </section>
             </Card> -->
-            <Card class="w-full md:w-1/2">
+            <Card class="w-full mr-0 mb-6 lg:w-1/2 lg:mr-6 lg:mb-0 custom-card-class">
                 <header class="w-full flex justify-between items-center m-5 md:m-10">
-                    <h2 class="uppercase text-black-3">Fleet activity map</h2>
+                    <h2 class="uppercase text-black-3">Таски</h2>
                 </header>
                 <section class="mb-5 mx-5 md:mb-10 md:mx-10">
                     <todo-list standard-text="Vehicles #"
@@ -117,18 +117,55 @@
                 </section>
             </Card>
         </div>
-        <div class="flex w-full  mt-6">
-          <Card class="w-1/4 mr-6">
-              <header class="w-full flex justify-between items-center mx-10 mt-10">
-                <icon class="bg-green-light text-green-normal p-3" size="6" name="check" round></icon>
-              </header>
-              <section class="mb-10 mx-10">
-                <h3 class="text-6xl text-left">$1,428</h3>
-                <p class="flex items-center text-black-3 text-lg">
-                  Vehicles on track
-                </p>
-              </section>
-          </Card>
+        <div class="w-full flex flex-col mt-6 lg:flex-row">
+            <Card class="w-full mr-0 mb-6 lg:w-1/2 lg:mr-6 lg:mb-0 custom-card-class">
+                <header class="w-full flex justify-between items-center m-5 md:m-10">
+                    <h2 class="uppercase text-black-3">Ближайшие</h2>
+                </header>
+                <ul v-if="carList" class="mb-5 mx-5 md:mb-10 md:mx-10">
+                    <li class="flex justify-between mt-4" v-for="car in carList" :key="car.id">
+                        <Avatar class="flex-initial mr-4" :img="car.img" type="simple" :notify="{ text: car.id + 1 }"/>
+                        <div class="flex-1">
+                            <p class="text-left">{{ car.name }}</p>
+                            <p class="text-left text-black-3">{{ car.model }}</p>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-right">${{car.price}}</p>
+                            <p class="text-right text-black-3">{{car.distance}} miles</p>
+                        </div>
+                    </li>
+                </ul>
+            </Card>
+           <Card class="w-full mr-0 mb-6 lg:w-1/2 lg:mr-6 lg:mb-0 custom-card-class">
+                <header class="w-full flex justify-between items-center m-5 md:m-10">
+                    <h2 class="uppercase text-black-3">Сегодня</h2>
+                </header>
+                <ul v-if="carList" class="mb-5 mx-5 md:mb-10 md:mx-10">
+                    <li class="flex justify-between mt-4" v-for="car in carList" :key="car.id">
+                        <Avatar class="flex-initial mr-4" :img="car.img" type="simple" :notify="{ text: car.id + 1 }"/>
+                        <div class="flex-1">
+                            <p class="text-left">{{ car.name }}</p>
+                            <p class="text-left text-black-3">{{ car.model }}</p>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-right">${{car.price}}</p>
+                            <p class="text-right text-black-3">{{car.distance}} miles</p>
+                        </div>
+                    </li>
+                </ul>
+            </Card>
+        </div>
+        <div class="flex flex-wrap items-start p-20">
+          <h1 class="text-2xl flex-initial leading-none text-black-1 mr-2">Календарь</h1>
+          <div class="flex justify-between items-start w-full">
+            <task-lane class="w-1/7 mr-6" id="monday" title="Понедельник" :items="neededItems"></task-lane>
+            <task-lane class="w-1/7 mr-6" id="tuesday" title="Вторник" :items="waintingItems"></task-lane>
+            <task-lane class="w-1/7 mr-6" id="wednessday" title="Среда" :items="serviceItems"></task-lane>
+            <task-lane class="w-1/7 mr-6" id="thursday" title="Четверг" :items="serviceItems"></task-lane>
+            <task-lane class="w-1/7 mr-6" id="friday" title="Пятница" :items="serviceItems"></task-lane>
+            <task-lane class="w-1/7 mr-6" id="saturday" title="Суббота" :items="serviceItems"></task-lane>
+            <task-lane class="w-1/7 mr-6" id="sunday" title="Воскресенье" :items="serviceItems"></task-lane>
+          </div>
         </div>
     </main>
 </template>
@@ -140,6 +177,8 @@
   // import LineChart from "../components/LineChart";
   // import Icon from "../components/Icon";
   import TodoList from "../components/TodoList";
+  import {mapState} from 'vuex';
+  import TaskLane from "../components/TaskLane"
 
   // import { LMap, LTileLayer, LCircleMarker, LCircle  } from 'vue2-leaflet';
 
@@ -155,7 +194,8 @@
       // LTileLayer,
       // LCircleMarker,
       // LCircle,
-      TodoList
+      TodoList,
+      TaskLane
     },
     data() {
       return {
@@ -345,6 +385,13 @@
       }
     },
 
+     computed: mapState({
+            neededItems: s => s.items.needed,
+            waintingItems: s => s.items.waiting,
+            serviceItems: s => s.items.service,
+            servicedItems: s => s.items.serviced
+      }),
+
     methods: {
         zoomUpdated (zoom) {
             this.zoom = zoom;
@@ -356,5 +403,10 @@
 </script>
 
 <style scoped>
+.custom-card-class{
+  max-height: 700px;
+  overflow-y: auto;
+  overflow-x: hidden;
+} 
 
 </style>

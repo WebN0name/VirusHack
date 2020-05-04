@@ -8,6 +8,9 @@
         <span class="ml-3">Velocity</span>
       </a>
       <div class="flex items-center">
+        <div class="money mx-2 relative text-gray-1">
+          <p><i class="fas fa-ruble-sign"></i> {{ money }}</p>
+        </div>
         <Button @click.native="openSideBar"
                 class="mx-2 relative text-gray-1 hover:text-primary-normal"
                 round>
@@ -32,7 +35,7 @@
             <use xlink:href="#c-icon-chat"></use>
           </svg>
         </Button>
-        <Button @click.native="openSideBar"
+        <Button @click.native="psihoProfile()"
                 class="mx-2"
                 round>
           <avatar type="simple"
@@ -107,6 +110,7 @@
             url: "/settings"
           }
         ],
+        money: 5400,
         user: {
           img: {
             src: require('./assets/img/avatar.png'),
@@ -122,6 +126,10 @@
     methods: {
       openSideBar () {
         this.isOpenSideBar = !this.isOpenSideBar;
+      },
+
+      psihoProfile(){
+        this.$router.push('/Psyhologist')
       }
     }
   }
@@ -146,6 +154,10 @@
   }
   main {
     grid-area: main;
+  }
+
+  .money p{
+    font-size: 25px;
   }
 
   @media (min-width: 768px) {
